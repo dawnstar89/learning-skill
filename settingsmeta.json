@@ -13,9 +13,9 @@
                         "placeholder": "demo prompt in the input box"
                     },
                     {
-                        "name": "allow_category_ex",
+                        "name": "allow_categories_ex",
                         "type": "text",
-                        "label": "allow category current humor,love,science",
+                        "label": "allow categories current humor,love,science",
                         "value": "humor,love,science"
                     }
                 ]
