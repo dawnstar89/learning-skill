@@ -2,18 +2,11 @@
 Teach Mycroft knowledge and humor.
 
 ## About
-This Skill helps to give Mycroft a personality, by learning new information that you provide. If mycroft didn't understand you, you can immediately train the previous request by saying "I want to explain"--then you do not have to do everything from the beginning.
+This Skill helps to give Mycroft a personality, by learning new information that you provide. If Mycroft didn't understand you, you can immediately train the previous request by saying "I want to explain" so you don't have to do everything from the beginning.
 
 ## Examples
-* "Do you want to learn something"
-* "Do you already know this"
-* "There you can learn something"
-* "I show you something"
-* "can you keep a secret"
-* "I tell you something private"
-* "Please do not say what I'm talking about"
-
-* "I want to explain it"
+* "Do you want to learn something?"
+* "I want to explain"
 
 ## Credits
 * Andreas Reinle(@gras64)
