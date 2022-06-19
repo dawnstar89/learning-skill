@@ -36,7 +36,7 @@ class LearningSkill(FallbackSkill):
         super(LearningSkill, self).__init__("LearningSkill")
         self.privacy = ""
         self.catego = ""
-        self.Category = ""
+        self.categories = ""
 
     def initialize(self):
         self.engine = IntentDeterminationEngine()
@@ -46,8 +46,8 @@ class LearningSkill(FallbackSkill):
             if self.settings.get('public_path_ex') else self.file_system.path+"/public"
         self.local_path = self.settings.get('local_path_ex') \
             if self.settings.get('local_path_ex') else self.file_system.path+"/private"
-        self.allow_category = self.settings.get('allow_category_ex') \
-            if self.settings.get('allow_category_ex') else "humor,love,science"
+        self.allow_categories = self.settings.get('allow_categories_ex') \
+            if self.settings.get('allow_categories_ex') else "humor,love,science"
         LOG.debug('local path enabled: %s' % self.local_path)
         self.save_path = self.file_system.path+"/mycroft-skills"
         self.saved_utt = ""
@@ -99,14 +99,14 @@ class LearningSkill(FallbackSkill):
         self.log.info("test "+str(paths))
         return paths                
 
-    def add_category(self, cat):
-        path = self.file_system.path + "/category/"+ self.lang
-        Category = self.get_response("add.category",
+    def add_categories(self, cat):
+        path = self.file_system.path + "/categories/"+ self.lang
+        categories = self.get_response("add.categories",
                                     data={"cat": cat})
         makedirs(path, exist_ok=True)
-        save_category = open(path +"/"+ cat+'.voc', "w")
-        save_category.write(cat)
-        save_category.close()
+        save_categories = open(path +"/"+ cat+'.voc', "w")
+        save_categories.write(cat)
+        save_categories.close()
         return True
 
     def _lines_from_path(self, path):
@@ -159,25 +159,25 @@ class LearningSkill(FallbackSkill):
 
     @intent_handler(IntentBuilder("HandleInteraction").require("Query").optionally("Something").
                     optionally("Private").require("Learning"))
-    def handle_learning(self, message, Category=None, saved_utt=None):
+    def handle_learning(self, message, categories=None, saved_utt=None):
         private = message.data.get("Private", None)
         if private is None:
             privacy = self.public_path
-            if Category is None:
+            if categories is None:
                 catego = self.get_response("begin.learning")
         else:
             privacy = self.local_path
-            if Category is None:
+            if categories is None:
                 catego = self.get_response("begin.private")
-        if Category is None:
-            for cat in self.allow_category.split(","):
+        if categories is None:
+            for cat in self.allow_categories.split(","):
                 try:
                     if self.voc_match(catego, cat):
-                        Category = cat
+                        categories = cat
                 except:
-                    self.add_category(cat)
-            if Category is None:        
-                self.speak_dialog("invalid.category", data={'categorys': self.allow_category})
+                    self.add_categories(cat)
+            if categories is None:        
+                self.speak_dialog("invalid.categories", data={'categories': self.allow_categories})
                 return
         #privacy = self.public_path
         if saved_utt is None:
@@ -196,8 +196,8 @@ class LearningSkill(FallbackSkill):
         answer = self.get_response("answer")
         if not answer:
             return  # user cancelled
-        answer_path = privacy+"/"+Category+"/"+"dialog"+"/"+self.lang+"/"
-        question_path = privacy+"/"+Category+"/"+"vocab"+"/"+self.lang+"/"
+        answer_path = privacy+"/"+categories+"/"+"dialog"+"/"+self.lang+"/"
+        question_path = privacy+"/"+categories+"/"+"vocab"+"/"+self.lang+"/"
         confirm_save = self.ask_yesno(
             "save.learn",
             data={"question": question, "answer": answer})
@@ -224,20 +224,20 @@ class LearningSkill(FallbackSkill):
         self.log.info('save utterance for learning')
 
     def will_let_you_know_intent(self, message):
-        catego = message.data.get("category")
-        Category = None
-        for cat in self.allow_category.split(","):
+        catego = message.data.get("categories")
+        categories = None
+        for cat in self.allow_categories.split(","):
             try:
                 if self.voc_match(catego, cat):
-                    Category = cat
+                    categories = cat
             except:
-                self.add_category(cat)
+                self.add_categories(cat)
         if not self.saved_utt is None:
             saved_utt = self.saved_utt
         else:
             saved_utt = None
-        self.log.info("find Category: "+str(Category)+" and saved  utt: "+str(saved_utt))
-        self.handle_learning(message, Category, saved_utt)
+        self.log.info("find categories: "+str(categories)+" and saved  utt: "+str(saved_utt))
+        self.handle_learning(message, categories, saved_utt)
 
     def say_differently_intent(self, message):
         self.saved_answer = self.save_answer
