@@ -2,9 +2,7 @@
 Teach Mycroft knowledge and humor.
 
 ## About
-This Skill helps to give Mycroft a personality by learning any new information that you provide.
-if mycroft not understood mycroft you. you can immediately train the previous request by saying "I want to explain it" or "houmor is probably not your strength".
-then you do not have to do everything from the beginning.
+This Skill helps to give Mycroft a personality, by learning new information that you provide. If mycroft didn't understand you, you can immediately train the previous request by saying "I want to explain"--then you do not have to do everything from the beginning.
 
 ## Examples
 * "Do you want to learn something"
@@ -16,10 +14,10 @@ then you do not have to do everything from the beginning.
 * "Please do not say what I'm talking about"
 
 * "I want to explain it"
-* "houmor is probably not your strength"
 
 ## Credits
 Andreas Reinle(@gras64)
+dawnstar89 (@dawnstar89) for English localization
 
 ## Conversations
     Use Conversation 1
@@ -89,7 +87,7 @@ Andreas Reinle(@gras64)
 
 
 ## Add a new category
-if you want to add a new category. you just have to add a category under mycroft ai. Mycroft will then ask you for the name in your language.
+If you want to add a new category, you just have to add a category under mycroft ai. Mycroft will then ask you for the name in your language.
 
 ## todo
 Dialog_Match: Support recognition of vocab files
