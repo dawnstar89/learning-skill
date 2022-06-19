@@ -16,8 +16,8 @@ This Skill helps to give Mycroft a personality, by learning new information that
 * "I want to explain it"
 
 ## Credits
-Andreas Reinle(@gras64)
-dawnstar89 (@dawnstar89) for English localization
+* Andreas Reinle(@gras64)
+* dawnstar89 (@dawnstar89) for English localization
 
 ## Conversations
     Use Conversation 1
